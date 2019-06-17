@@ -26,9 +26,22 @@ Business Value: automate manual operation for compliance reporting. build system
 concurrency issues
 
 
-Overall challenges:
-Performance:
--Write: 
-   cache share dataset(reference data)
-   optimize sql for source data extraction(filter, join)
+**Overall challenges:**<br>
+**Performance:**<br>
+
+- Write: 
+   * cache share dataset(reference data)
+   * optimize sql for source data extraction(filter, join)
+- Read:
+DB setup: master and slave DB. Master handles(IUD, write, and send transaction log to slave for replication) and slave DB handle read 
+
+   * for batch data processing, once per day.
+   
+
 ## Database Related Questions
+*Q1. How to handle replica lag?
+A. impact: is your business need required immediate read of updated data? for long term analysis -> no. 
+why got replica lag: too many transaction for replica to keep up -> fix by scaling: data sharding.
+long transaction that take up server resources. fixed by application design to optimize query, control query timeout. reduce DB IO by caching slow changing data.
+base on business use case:
+strong consistancy: enforce the write transaction to be successful only if the replica catch up. and prevent read immediatly after write.
