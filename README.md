@@ -39,9 +39,9 @@ DB setup: master and slave DB. Master handles(IUD, write, and send transaction l
    
 
 ## Database Related Questions
-*Q1. How to handle replica lag?
-A. impact: is your business need required immediate read of updated data? for long term analysis -> no. 
-why got replica lag: too many transaction for replica to keep up -> fix by scaling: data sharding.
-long transaction that take up server resources. fixed by application design to optimize query, control query timeout. reduce DB IO by caching slow changing data.
-base on business use case:
-strong consistancy: enforce the write transaction to be successful only if the replica catch up. and prevent read immediatly after write.
+*Q1. How to handle replica lag?<br>
+A. impact: is your business need required immediate read of updated data? for long term analysis -> no. <br>
+why got replica lag: too many transaction for replica to keep up -> fix by scaling: data sharding.<br>
+long transaction that take up server resources. fixed by application design to optimize query, control query timeout. reduce DB IO by caching slow changing data.<br>
+base on business use case:<br>
+strong consistancy: enforce the write transaction to be successful only if the replica catch up. and prevent read immediatly after write.<br>
